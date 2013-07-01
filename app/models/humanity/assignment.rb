@@ -3,7 +3,7 @@ module Humanity
     belongs_to :human, polymorphic: true
     belongs_to :role
 
-    attr_accessible # none
+    #attr_accessible # none
 
     scope :by_source, ->(source) { where(source: source) }
   end

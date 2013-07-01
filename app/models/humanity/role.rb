@@ -2,7 +2,7 @@ module Humanity
   class Role < ActiveRecord::Base
     has_many :assignments, dependent: :destroy
 
-    attr_accessible # none
+    #attr_accessible # none
 
     validates_presence_of :name
 
