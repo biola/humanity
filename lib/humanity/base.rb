@@ -30,11 +30,19 @@ module Humanity
 
     def update_roles!(role_names, source)
       prev_roles = self.roles
-      new_roles = role_names.map { |n| Role.find_or_create_by_name(n) }
+      new_roles = if Role.respond_to? :find_or_create_by
+        role_names.map { |n| Role.find_or_create_by(name: n) }
+      else
+        role_names.map { |n| Role.find_or_create_by_name(n) }
+      end
 
       # Create new roles and/or update source
       new_roles.each do |role|
-        assignment = Assignment.find_or_initialize_by_human_id_and_human_type_and_role_id(self.id, self.class.to_s, role.id)
+        assignment = if Assignment.respond_to? :find_or_initialize_by
+          Assignment.find_or_initialize_by(human_id: self.id, human_type: self.class.to_s, role_id: role.id)
+        else
+          Assignment.find_or_initialize_by_human_id_and_human_type_and_role_id(self.id, self.class.to_s, role.id)
+        end
         assignment.source = source
         assignments << assignment if assignment.changed?
       end
