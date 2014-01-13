@@ -13,5 +13,6 @@ spec = Gem::Specification.new do |s|
   s.author = 'Adam Crownoble'
   s.email = 'adam.crownoble@biola.edu'
   s.homepage = 'https://github.com/biola/humanity'
+  s.license = 'MIT'
   s.add_dependency('rails', '>= 3.0.0')
 end
