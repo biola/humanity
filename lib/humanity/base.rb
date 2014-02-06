@@ -29,6 +29,8 @@ module Humanity
     end
 
     def update_roles!(role_names, source)
+      source = source.to_s unless source.nil?
+
       prev_roles = self.roles
       new_roles = if Role.respond_to? :find_or_create_by
         role_names.map { |n| Role.find_or_create_by(name: n) }
