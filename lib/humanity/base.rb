@@ -20,8 +20,8 @@ module Humanity
       roles.map(&:to_sym)
     end
 
-    def has_role?(role)
-      roles.where(name: role.to_s).first.present?
+    def has_role?(*role)
+      roles.where(name: role.flatten.map(&:to_s)).any?
     end
 
     def admin?
