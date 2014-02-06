@@ -6,6 +6,10 @@ module Humanity
 
       base.validates_presence_of :username
       base.validates_uniqueness_of :username
+
+      Role.class_eval do
+        has_many :humans, through: :assignments, source_type: base.to_s
+      end
     end
 
     def name
